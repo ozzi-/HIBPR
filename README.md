@@ -12,3 +12,11 @@ sending mail from X.Y@Z.ch to X.Y@Z.ch with subject Have I been pwnd Report 05-0
 Example of the generated email:
 
 ![email](https://i.imgur.com/dWVlW2x.png)
+
+# Getting started
+Edit src/email.json with a valid SMTP configuration.
+
+Edit src/emailaddresses.json with the addresses you wish to receive a report for.
+
+Build a jar, copy the json files from within the jar to the same directory as the jar.
+
