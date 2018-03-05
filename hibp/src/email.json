@@ -1,0 +1,11 @@
+{
+	"recipients":[ "*****@****.ch" ],
+	"sender": {
+		"address": "*****@****.ch", 
+		"host": "smtp.gmail.com",
+		"port":25,
+		"user":"*********@gmail.com",
+		"password":"**********",
+		"subject":"Have I been pwnd Report <d>"
+	}
+}
