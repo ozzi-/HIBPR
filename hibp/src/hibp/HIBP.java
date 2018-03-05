@@ -27,16 +27,20 @@ public class HIBP {
 			if(hibpr.getNwFail()!=null) {
 				mailHTML += hibpr.toString();
 				System.out.println(hibpr.toString());
-			}
-			boolean pwnPrinted=false;
-			for (String pwn : hibpr.getPwns()) {
-				if(!history.contains(hibpr.getEmail(), pwn)) {
-					history.addHistory(address, pwn);
-					if(!pwnPrinted) {
-						mailHTML += hibpr.toString();
-						pwnPrinted=true;
-						System.out.println(hibpr.toString());
+			}else {
+				boolean pwnPrinted=false;
+				for (String pwn : hibpr.getPwns()) {
+					if(!history.contains(hibpr.getEmail(), pwn)) {
+						history.addHistory(address, pwn);
+						if(!pwnPrinted) {
+							mailHTML += hibpr.toString();
+							pwnPrinted=true;
+							System.out.println(hibpr.toString());
+						}
 					}
+				}
+				if(!pwnPrinted) {
+					System.out.println(address+" ok");
 				}
 			}
 			try { TimeUnit.MILLISECONDS.sleep(apiRateLimitTime); } catch (InterruptedException e) { }
