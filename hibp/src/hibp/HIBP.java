@@ -20,7 +20,7 @@ public class HIBP {
 		ArrayList<String> addresses = Persistence.loadEMailAddresses();
 		System.out.println("Loaded addresses: "+addresses.toString());
 		String mailHTML = "<html>";
-		
+		boolean noPwns=true;
 		for (String address : addresses) {
 			String addressEncoded=URLEncoder.encode(address, "UTF-8");
 			HIBPR hibpr = Network.getHIBPRResult(apiEndpointBreachedAccount+addressEncoded,address);
@@ -30,6 +30,7 @@ public class HIBP {
 			}else {
 				boolean pwnPrinted=false;
 				for (String pwn : hibpr.getPwns()) {
+					noPwns=false;
 					if(!history.contains(hibpr.getEmail(), pwn)) {
 						history.addHistory(address, pwn);
 						if(!pwnPrinted) {
@@ -44,6 +45,9 @@ public class HIBP {
 				}
 			}
 			try { TimeUnit.MILLISECONDS.sleep(apiRateLimitTime); } catch (InterruptedException e) { }
+		}
+		if(noPwns){
+			mailHTML+="<br>No pwnd email addresses found!";
 		}
 		boolean sendMailSuccess = Email.sendToRecipients(mailHTML+="</html>");
 		// only update history when report was confirmed
